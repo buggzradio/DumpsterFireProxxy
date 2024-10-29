@@ -94,6 +94,10 @@ footer {
   margin-bottom: 20px;
 }
 
+footer:hover {
+  color: white;
+}
+
 footer > div {
   display: flex;
   justify-content: left;
@@ -106,7 +110,7 @@ footer a,
 footer span {
   margin: 0 15px;
   text-decoration: none;
-  color: #fff;
+  color: rgb(255, 255, 255, 0.2);
   font-size: 15px;
 }
 
@@ -116,6 +120,7 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+  color: white;
 }
 
 .desc p {
@@ -135,13 +140,13 @@ footer a:hover {
   width: 350px;
   margin-top: 5px;
   border-radius: 50px;
-  color: #fff;
+  color: white;
   transition: border-radius 0.1s;
 }
 
 #uv-address:focus {
-  border: 1px solid rgba(253, 253, 253, 0.514);
-  border-radius: 6px;
+  border: 1px solid white;
+  border-radius: 20px;
 }
 
 .credit {
@@ -182,5 +187,24 @@ footer a:hover {
 }
 
 .credit input:checked ~ pre {
+  display: block;
+}
+
+.carousel-container {
+  width: 100%;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.carousel-item {
+  display: none;
+  color: rgb(255, 255, 255, 0.2);
+}
+
+.carousel-item:hover {
+  color: white;
+}
+
+.active {
   display: block;
 }

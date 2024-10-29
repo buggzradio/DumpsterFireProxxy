@@ -64,11 +64,31 @@
       <img class="logo" src="https://media.tenor.com/ZqP4FX90epQAAAAM/dumpster-fire.gif" alt="DumpsterFire" />
       <h1>DumpsterFire By Buggz</h1>
     </div>
-    <div class="flex-center desc left-margin">
-      <p>
-  Welcome to BuggzBuilt DumpsterFire 
-      </p>
-    </div>
+    <div class="carousel-container">
+      <div class="carousel-item active">
+          <p>I'm glad you're here, actually, no I'm not.</p>
+      </div>
+  <div class="carousel-item">
+      <p>Henry on Top, and you know it...</p>
+  </div>
+  <div class="carousel-item">
+      <p><a href="https://buggzradio.github.io/jarbeefis/resources">I made a Resources page, what should I put on it?</a></p>
+  </div>
+  <div class="carousel-item">
+      <p><a href="https:/buggzradio.github.io/jarbeefis/contact">Request A Game</a></p>
+      </div>
+      <div class="carousel-item">
+      <p>I don't have a Dababy fettish</p>
+      </div>
+      <div class="carousel-item">
+          <p><a href="https://github.com/BuggzRadio-AZD" style="color: grey;">Follow me on GitBub</a></p>
+          </div>
+
+      <div class="carousel-item">
+          <p>1, 2, 3, That's Enough For Mee!</p>
+          </div>
+
+</div>
 
     <form id="uv-form" class="flex-center">
       <input
@@ -76,7 +96,7 @@
         value="https://www.google.com/search?q=%s"
         type="hidden"
       />
-      <input id="uv-address" type="text" placeholder="Search the web freely" />
+      <input id="uv-address" type="text" placeholder="Let's Goo!" />
     </form>
     <div class="desc left-margin">
       <p id="uv-error"></p>
@@ -85,22 +105,19 @@
     <footer>
       <div>
         <a
-          title="The TitaniumNetwork GitHub organization"
+          title="TitaniumNetwork Github"
           href="https://github.com/titaniumnetwork-dev"
-          >TitaniumNetwork</a
-        >
-        <a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock"
-          >Discord</a
+          >TitaniumNetwork Github</a
         >
         <a
-          title="The TompHTTP GitHub organization"
-          href="https://github.com/tomphttp"
-          >TompHTTP</a
+        title="BuggzRadio Github"
+        href="https://github.com/buggzradio"
+        >BuggzRadio Github</a
         >
         <a
-          title="The official deployment repository for Ultraviolet"
-          href="https://github.com/titaniumnetwork-dev/Ultraviolet-App"
-          >GitHub</a
+        title="TitaniumNetwork Github"
+        href="https://buggzradio.github.io/jarbeefis"
+        >The Static Dumpster Fire</a
         >
         <a title="License information" href="credits.html">Credits</a>
       </div>
@@ -109,5 +126,22 @@
       </div>
     </footer>
     <iframe style="display: none;" id="uv-frame"></iframe>
+  
+    <script>
+      let currentIndex = 0;
+      const items = document.querySelectorAll('.carousel-item');
+      const totalItems = items.length;
+  
+      function showNextItem() {
+          items[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % totalItems;
+          items[currentIndex].classList.add('active');
+      }
+  
+      setInterval(showNextItem, 4000); // Change item every 3 seconds
+  </script>
+
   </body>
+
+
 </html>
