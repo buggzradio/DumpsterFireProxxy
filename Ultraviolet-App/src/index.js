@@ -58,7 +58,7 @@ fastify.server.on("listening", () => {
 
 	// by default we are listening on 0.0.0.0 (every interface)
 	// we just need to list a few
-	console.log("Listening on:");
+	console.log("🗑🔥 Your Dumpster Fire is burning on:");
 	console.log(`\thttp://localhost:${address.port}`);
 	console.log(`\thttp://${hostname()}:${address.port}`);
 	console.log(
@@ -66,6 +66,10 @@ fastify.server.on("listening", () => {
 			address.family === "IPv6" ? `[${address.address}]` : address.address
 		}:${address.port}`
 	);
+	console.log("Make sure to click: Open in Browser");
+
+
+
 });
 
 process.on("SIGINT", shutdown);
@@ -73,8 +77,11 @@ process.on("SIGTERM", shutdown);
 
 function shutdown() {
 	console.log("SIGTERM signal received: closing HTTP server");
+	console.log("Thanks for using my proxy, make sure to cheack out @TitaniumNetwork on GitHub!");
+	console.log("They put out the dumpster fire, Bye! 👋");
 	fastify.close();
 	process.exit(0);
+
 }
 
 let port = parseInt(process.env.PORT || "");

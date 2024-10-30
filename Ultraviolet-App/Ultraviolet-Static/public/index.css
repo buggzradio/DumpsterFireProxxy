@@ -208,3 +208,22 @@ footer a:hover {
 .active {
   display: block;
 }
+
+.header1 {
+  display: flex; 
+  align-items: center;
+  background-color: rgb(55, 55, 55);
+  color: black;
+  justify-content: space-between;
+}
+
+.headbtn {
+  color: black;
+  text-decoration: none;
+}
+
+.headbtn:hover {
+  color: white;
+  text-decoration: none;
+  text-decoration: underline;
+}
