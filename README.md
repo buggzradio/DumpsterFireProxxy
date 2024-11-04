@@ -11,3 +11,11 @@ Click *Code* and then *Codespaces* and create a new codespace.
 Wait until you see this screen:
 <br>
 <img src="images/codespacehome.png" width="500">
+
+#### Step 3
+Find the terminal, and type *cd Ultraviolet-App* hit enter. Next, type *npm install* wait for it to do it's thing, it takes a minute. Once its done, type *npm start* and your server should start.
+<br>
+<img src="images/codespacesterminal.png" width="500">
+<br>
+<br>
+<img src="images/typeinterminal.png" width="500">
