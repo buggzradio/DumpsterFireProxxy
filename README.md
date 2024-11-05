@@ -19,3 +19,9 @@ Find the terminal, and type *cd Ultraviolet-App* hit enter. Next, type *npm inst
 <br>
 <br>
 <img src="images/typeinterminal.png" width="500">
+
+#### Step 4
+Click open in browser!
+<br>
+<img src="images/openinbrowser.png" width="500">
+<br>
