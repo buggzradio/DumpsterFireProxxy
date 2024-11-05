@@ -3,7 +3,7 @@
 body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   margin: 0;
-  background: #111;
+  background: black;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -207,4 +207,20 @@ footer a:hover {
 
 .active {
   display: block;
+}
+
+.btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: white;
+  color: #111;
+  transform: scale(1.1);
 }
