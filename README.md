@@ -15,6 +15,9 @@ Wait until you see this screen:
 #### Step 3
 Find the terminal, and type *cd Ultraviolet-App* hit enter. Next, type *npm install* and wait for it to do it's thing, it takes a minute. Once its done, type *npm start* and your server should start.
 <br>
+1. cd Ultraviolet-App
+2. npm install (takes a min)
+3. npm start<br>
 <img src="images/codespacesterminal.png" width="500">
 <br>
 <br>
