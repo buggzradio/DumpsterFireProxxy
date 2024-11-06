@@ -38,10 +38,10 @@ jobs:
         run: |
           pr_exists=$(gh pr list --state open --head TRUSTED_dev --base main --json number -q '.[0].number')
           echo "PR exists: $pr_exists"
-          echo "::set-output name=pr_exists::$pr_exists"
+          echo "pr_exists=$pr_exists" >> $GITHUB_ENV
 
       - name: Create Pull Request from TRUSTED_dev to main
-        if: steps.pr_check.outputs.pr_exists == ''
+        if: env.pr_exists == ''
         id: pr
         run: |
           commit_msg=$(git log -1 --pretty=%B)  # Get the latest commit message
