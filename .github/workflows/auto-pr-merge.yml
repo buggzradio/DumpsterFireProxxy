@@ -5,6 +5,11 @@ on:
     branches:
       - TRUSTED_dev  # Change this to your trusted dev branch name
 
+permissions:
+  pull-requests: write  # Allow GitHub Actions to create and merge pull requests
+  contents: read        # Allow GitHub Actions to read repository contents
+  actions: read         # Allow GitHub Actions to interact with actions
+
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
@@ -31,24 +36,33 @@ jobs:
       - name: Check if PR already exists
         id: pr_check
         run: |
+          echo "Checking for existing pull request from TRUSTED_dev to main..."
           pr_exists=$(gh pr list --state open --head TRUSTED_dev --base main --json number -q '.[0].number')
           echo "PR exists: $pr_exists"
-          echo "::set-output name=pr_exists::$pr_exists"
+          echo "pr_exists=$pr_exists" >> $GITHUB_ENV
 
       - name: Create Pull Request from TRUSTED_dev to main
-        if: steps.pr_check.outputs.pr_exists == ''
+        if: env.pr_exists == ''
         id: pr
         run: |
           commit_msg=$(git log -1 --pretty=%B)  # Get the latest commit message
           pr_title="MERGE: ${commit_msg} From: TRUSTED_dev"  # Set PR title with commit message
+          echo "Creating PR with title: $pr_title"
 
           # Create a pull request using GitHub CLI
           gh pr create --base main --head TRUSTED_dev --title "$pr_title" --body "Automated PR to merge TRUSTED_dev into main."
+        
+      - name: Verify PR creation
+        run: |
+          echo "Verifying PR creation..."
+          gh pr list --state open --head TRUSTED_dev --base main
 
       - name: Merge Pull Request
         run: |
           # Wait for PR creation and retrieve the PR number
+          echo "Retrieving PR number..."
           pr_number=$(gh pr list --state open --head TRUSTED_dev --json number -q '.[0].number')
+          echo "PR number: $pr_number"
 
           # Merge the pull request automatically
           gh pr merge $pr_number --merge --auto
