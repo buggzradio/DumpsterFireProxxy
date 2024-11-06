@@ -1,0 +1,54 @@
+name: Auto Create PR and Merge
+
+on:
+  push:
+    branches:
+      - TRUSTED_dev  # Change this to your trusted dev branch name
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Ensure the working directory is clean
+        run: |
+          git reset --hard HEAD  # Discard any uncommitted changes
+          git clean -fd          # Remove untracked files
+
+      - name: Set up GitHub CLI
+        run: |
+          # Install GitHub CLI
+          curl -sLo gh.tar.gz https://github.com/cli/cli/releases/download/v2.28.0/gh_2.28.0_linux_amd64.tar.gz
+          tar -xvzf gh.tar.gz
+          sudo mv gh*/bin/gh /usr/local/bin/  # Install gh globally
+          gh --version  # Verify installation
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if PR already exists
+        id: pr_check
+        run: |
+          pr_exists=$(gh pr list --state open --head TRUSTED_dev --base main --json number -q '.[0].number')
+          echo "PR exists: $pr_exists"
+          echo "::set-output name=pr_exists::$pr_exists"
+
+      - name: Create Pull Request from TRUSTED_dev to main
+        if: steps.pr_check.outputs.pr_exists == ''
+        id: pr
+        run: |
+          commit_msg=$(git log -1 --pretty=%B)  # Get the latest commit message
+          pr_title="MERGE: ${commit_msg} From: TRUSTED_dev"  # Set PR title with commit message
+
+          # Create a pull request using GitHub CLI
+          gh pr create --base main --head TRUSTED_dev --title "$pr_title" --body "Automated PR to merge TRUSTED_dev into main."
+
+      - name: Merge Pull Request
+        run: |
+          # Wait for PR creation and retrieve the PR number
+          pr_number=$(gh pr list --state open --head TRUSTED_dev --json number -q '.[0].number')
+
+          # Merge the pull request automatically
+          gh pr merge $pr_number --merge --auto

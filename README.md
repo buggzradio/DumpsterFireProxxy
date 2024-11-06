@@ -1,5 +1,18 @@
 # Welcome to the Dynamic DumpsterFire 
 Built by me, Based off of @titaniumnetwork-dev's Ultraviolet
+<br>
+
+## About the Proxy
+- Built for a "school project"
+- Based off of @titaniumnetwork's Ultraviolet App
+- Frontend is "Ultraviolet-Static"
+- Called a dumpster fire because everything I code is sort of a Dumpster Fire
+
+## About Me
+- I am 14
+- I code in html, css, js, node.js, php, circutpython, python, ejs and more
+- I will code pretty much anything for anyone.
+
 ## Running the Proxy
 ### Github Codespaces (Preferred Method)
 #### Step 1
