@@ -10,7 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3  # Checkout the repository code
+        uses: actions/checkout@v3
+
+      - name: Ensure the working directory is clean
+        run: |
+          git reset --hard HEAD  # Discard any uncommitted changes
+          git clean -fd          # Remove untracked files
 
       - name: Set up GitHub CLI
         run: |
@@ -21,9 +26,17 @@ jobs:
           gh --version  # Verify installation
 
       - name: Authenticate GitHub CLI
-        run: gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token to authenticate CLI
+        run: gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if PR already exists
+        id: pr_check
+        run: |
+          pr_exists=$(gh pr list --state open --head TRUSTED_dev --base main --json number -q '.[0].number')
+          echo "PR exists: $pr_exists"
+          echo "::set-output name=pr_exists::$pr_exists"
 
       - name: Create Pull Request from TRUSTED_dev to main
+        if: steps.pr_check.outputs.pr_exists == ''
         id: pr
         run: |
           commit_msg=$(git log -1 --pretty=%B)  # Get the latest commit message
