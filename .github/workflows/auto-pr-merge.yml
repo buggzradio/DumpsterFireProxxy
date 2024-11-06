@@ -1,0 +1,41 @@
+name: Auto Create PR and Merge
+
+on:
+  push:
+    branches:
+      - TRUSTED_dev  # Change this to your trusted dev branch name
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git for commit and push
+        uses: git-config-user-info-action@v1
+        with:
+          name: 'GitHub Actions'
+          email: 'actions@github.com'
+
+      - name: Create Pull Request from TRUSTED_dev to main
+        id: pr
+        run: |
+          # Set up GitHub CLI
+          curl -sLo gh https://github.com/cli/cli/releases/download/v2.28.0/gh_2.28.0_linux_amd64.tar.gz
+          tar -xvzf gh_2.28.0_linux_amd64.tar.gz
+          sudo mv gh*/bin/gh /usr/local/bin/
+          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+          
+          # Create the pull request with the custom title and body
+          commit_msg=$(git log -1 --pretty=%B)  # Get the last commit message
+          pr_title="MERGE: ${commit_msg} From: TRUSTED_dev"
+          
+          # Create the PR using GitHub CLI
+          gh pr create --base main --head TRUSTED_dev --title "$pr_title" --body "Automated PR to merge TRUSTED_dev into main."
+
+      - name: Merge Pull Request
+        run: |
+          # Wait for PR to be created and then merge
+          pr_number=$(gh pr list --state open --head TRUSTED_dev --json number -q '.[0].number')
+          gh pr merge $pr_number --merge --auto
