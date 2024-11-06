@@ -5,6 +5,11 @@ on:
     branches:
       - TRUSTED_dev  # Change this to your trusted dev branch name
 
+permissions:
+  pull-requests: write  # Allow GitHub Actions to create and merge pull requests
+  contents: read  # Allow GitHub Actions to read repository contents
+  actions: read  # Allow GitHub Actions to interact with actions
+
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
