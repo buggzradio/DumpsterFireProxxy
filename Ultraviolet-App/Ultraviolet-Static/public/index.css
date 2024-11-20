@@ -224,3 +224,30 @@ footer a:hover {
   color: #111;
   transform: scale(1.1);
 }
+
+.other {
+  color: white;
+  align-self: center; /* Ensure it's inside a flex container */
+  text-align: center; /* Adds text centering for the content */
+}
+
+.otherbutton {
+  font-size: large;
+  padding: 10px 20px; /* Adds some padding for a better look */
+  border: none; /* Removes default button borders */
+  cursor: pointer; /* Changes the cursor to pointer on hover */
+}
+
+
+button {
+  background-color: black;
+  color: rgb(255, 255, 255, 0.2);
+  border-radius: 7px;
+}
+
+button:hover {
+  background-color: rgb(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 13px;
+  text-decoration: underline;
+}
