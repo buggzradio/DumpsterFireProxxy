@@ -30,7 +30,9 @@ Find the terminal, and type *cd Ultraviolet-App* hit enter. Next, type *npm inst
 <br>
 1. cd Ultraviolet-App
 2. npm install (takes a min)
-3. npm start<br>
+3. npm start
+
+<br>
 <img src="images/codespacesterminal.png" width="500">
 <br>
 <br>
